@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Autorisation de Transport</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@^0.7.0"
+        }
+      }
+    </script>
+    <script type="module" src="index.tsx"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAAA+CAMAAAC2+sBRAAAAUVBMVEX/2AD/2wD/2wD/3AD/3AD/2QD/2QD/4gD/4QD90gD/5AD/2AD/5QD/3gD/3wB5bwb/6wD/5gD90wD/6AD/7gD+0QD/8ABzeAnuwwP/9wD/8wCDdwh+dAmAfgB1hgA0RSTlMAAQIDBAUGBwgJCwwNDxIUFhgeJzU3ODxBS0xYXV5ncXV7f4GGlKyztbvFzNDX3ODv8vX5/bbhbnoAAASbSURBVHja7Zt/aBtFFMe/VdEui2WJLIsFYUmW2BZbBCGFkLStUNIWrdS+/1vY7ezM7MvuzL47gT+eF3/e+3x3T2ZnZpZYa20MwdK3E0I4hFw6R2FG7jDk8gU/C84/8rVl72xZ+Vf/89k/+aQJ0dK/jLym15oWnJ9DkQkR0v254k0pL9K05E1Fj0fI9vMkadLfqmnJmxYNnhz/aJ5D05L/lT4fGZJzS/5V3+Tlkpxn+edcW/JvmT6XJCH3l/x3vj9pS+4s+fejT9OW3Fny7+t+pC1p/zT/vj9JS+4v+XfN+5K2FP/wDk+elLwD+ffS+UlbwT/sI/SVsB/+4T6lXWA/+GdpS2E/+KdtS3EHf7SPqS3E/fCH+5S2Fnfwh/uUtxb3ww/uU9pq3Is/3Ke0texn+MN9SltL3MM/7lPaSt2LP9yntJW9Hfww31KW4t7MMN+n9KWwD/+4T2lLejv4Q/3KW1p7uE/7FPa2thL/o/SltY+8M9tSlsH/+EOpa0D/+EP9yltIu4D/4Q/3KW0j7gX/h3tKWwn7wz21LW0t7oE/3Ke0tbUH/7BPqUtjH/o/SltLe8A/84T6lLcD/4Q/3KW0j7kf+D/eUtgP3h3tqWxt78Ef7lPaUtpb3gh/uUtpa3o7+MN9SltLezDDfp/Sltb+8I/Sltbe/OEOpS2APfCH+5S2kXcB/+EfSltI+4F/9yltIe8H/8M/SlsLe+CP9yltbe2BP9yntLW1B3+4T2lLYx/6P0pbS3vAP/CE+pS2A/+HP9yltI+5H/g/3lLYD94d7altbe/BH+5T2lrelv4Q33KW0t7cMM+n9KWwr7wz21La29+cMdSlv6p/1C2n6n5k9rVzD7rM2n/M67v/b5D+652V/tH3/4h9+I2u+T2h/9Yv3D/7l/v7L/8A9n+4//sE9oP/jDPUpbCHvAP7WtrS3uww/uU9pa2oM/3Ke0tbEP/T+lLcU9mGE/SltLex/4h3tKWwr7wz21LW0l7wX/wz2lLcW9+MM9Slv6l/8D/l/6p/9A/6V/8i8I/4F/8F/gH9qH8If7lLYWd+EP9yltLe5DP/CH+5S2lLYU/hDtQ9ra2oP/P6WtxT3wgXtKWwt78M99SlsLewf+YJ/SFuLe+M/cKW0p7ME/7lNaS/ED/+Af/nS+pS2FvXgH/6UtrS2Ev9gH9LWwn7wj31KWwh7cD/8gz5Ja+k/8Q/+4B/+7n1KWwh78Af8wz2lLcH/4A/4h3tKW2p7wT/8A/6hfaT9R9q3tLXwh/sU/hDtQ2kv+MN9SlfSh/D/+MN9SrvQPrS1tAf/MI/SVsIe/GEe/nSe0pawH/xhHqWt5D3wwzxKW4t74R/mUdqH9pW2FPbBH+ZRWgveD/7hj31KWwp78Af8wzylreAP+Id/wD+0b2kf+ge+D/+hv5T2oT/8A9tW2p/6B/6BPwT8A/8h4B/6RwH/0D8K+If+ScA/9I8C/qF/FPAf/QcB/0B4CH+4X0o/+uEP9yvtQwH/wB/uU9qHAv6BP9yn9E54AP9gn9J3wR/sU/ojfBP84T6lv8I74A/2KW0r/B4+CPuUfpM/CA/hHvQnfBPuQf8wfhPuYJ/y/cIP4B/6R/4h/OF+lfcP/AEP/iEfhP/ML+If90v/Gv/QL/z/AIAAAg+g+U2SAAAAAElFTkSuQmCC" alt="Logo de la Ville de Créteil" id="logo">
+            <h1>Générateur d'Autorisation de Transport de Restes Mortels</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="form-container">
+                <h2>Informations</h2>
+                <form id="doc-form">
+                    <div class="form-group">
+                        <label for="mayorName">Nom du Maire</label>
+                        <input type="text" id="mayorName" value="Laurent CATHALA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="communeName">Commune</label>
+                        <input type="text" id="communeName" value="Créteil" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Code Postal</label>
+                        <input type="text" id="postalCode" value="94000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="authDate">Date autorisation transport</label>
+                        <input type="text" id="authDate" value="04/09/2025" required placeholder="JJ/MM/AAAA">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Entreprise funéraire</label>
+                        <input type="text" id="companyName" value="SANTILLY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="companyAddress">Adresse de l'entreprise</label>
+                        <input type="text" id="companyAddress" value="240, rue de Stalingrad, 93700 Drancy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crematoriumInfo">Crématorium (Nom, Lieu)</label>
+                        <input type="text" id="crematoriumInfo" value="Pompes Funèbres Caton, dans le Loir-et-Cher" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="habilitationNumber">N° d'habilitation</label>
+                        <input type="text" id="habilitationNumber" value="11.1.49.2025" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="placeOfIssue">Fait à</label>
+                        <input type="text" id="placeOfIssue" value="Créteil" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueDate">Date d'établissement</label>
+                        <input type="text" id="issueDate" value="04/09/2025" required placeholder="JJ/MM/AAAA">
+                    </div>
+                    <div class="form-group">
+                        <label for="delegateName">Nom du délégataire</label>
+                        <input type="text" id="delegateName" value="Philippe Carré" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="delegateTitle">Titre du délégataire</label>
+                        <input type="text" id="delegateTitle" value="Conservateur" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signature">Signature (numérique)</label>
+                        <input type="text" id="signature" value="/s/ Philippe Carré" required placeholder="Ex: /s/ Prénom Nom">
+                    </div>
+                    <div id="error-message" class="error-message hidden"></div>
+                    <button type="submit" id="generate-btn">Générer le document</button>
+                </form>
+            </div>
+            <div class="output-container">
+                <h2>Document Généré</h2>
+                <div id="output-paper">
+                    <div id="loader" class="hidden">
+                        <div class="spinner"></div>
+                        <p>Génération en cours...</p>
+                    </div>
+                    <pre id="result-text"></pre>
+                </div>
+                <div class="output-actions">
+                    <button id="copy-btn" class="hidden" aria-label="Copier le texte">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0 -1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        Copier
+                    </button>
+                    <button id="publish-btn" class="hidden" aria-label="Publier et créer un lien de partage">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        Publier
+                    </button>
+                </div>
+                <div id="share-link-container" class="hidden">
+                    <label for="share-link">Lien de partage permanent :</label>
+                    <div class="share-link-wrapper">
+                        <input type="text" id="share-link" readonly>
+                        <button id="copy-link-btn" aria-label="Copier le lien">
+                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0 -1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
